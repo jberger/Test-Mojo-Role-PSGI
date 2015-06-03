@@ -1,0 +1,8 @@
+#!include_default
+
+# avoid README.pod intended for github
+\bREADME\.pod
+
+# avoid metamerge.json intended for authoring
+\bmetamerge\.json
+
