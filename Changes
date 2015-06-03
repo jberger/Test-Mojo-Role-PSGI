@@ -1,5 +1,8 @@
 Revision history for Perl module Test-Mojo-Role-PSGI 
 
+0.02 2015-06-03
+  - Now a little more flexible in what is accepted as a psgi app
+  - Bump version of MountPSGI to 0.04
 0.01 2015-06-03
   - Initial release
 

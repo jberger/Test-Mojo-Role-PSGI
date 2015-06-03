@@ -4,18 +4,18 @@ use Role::Tiny;
 
 use Mojolicious;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 $VERSION = eval $VERSION;
 
 around new => sub {
-  my ($orig, $self, $script) = @_;
-  if (!$script || ref $script) {
-    return $self->$orig($script);
-  }
+  my ($orig, $self, $psgi) = @_;
   my $t = $self->$orig;
-  my $app = Mojolicious->new;
-  $app->plugin('Mojolicious::Plugin::MountPSGI' => { '/' => $script });
-  return $t->app($app);
+  if ($psgi) {
+    my $app = Mojolicious->new;
+    $app->plugin('Mojolicious::Plugin::MountPSGI' => { '/' => $psgi }) if $psgi;
+    $t->app($app);
+  }
+  return $t;
 };
 
 1;
@@ -55,8 +55,10 @@ The author suggests using L<Test::Mojo::WithRoles> to make instances of the test
 
 =head2 new
 
-Overrides the L<Test::Mojo/new> method to instantiate a PSGI app I<IF> the argument to new is a string and not empty or an app instance.
-This should feel very similar to the original behavior except that now PSGI apps are instantiated rather than Mojolicious apps.
+Overrides the L<Test::Mojo/new> method to use a PSGI app, instantiating a script or class if necessary.
+This should feel very similar to the original behavior except that now PSGI apps are the target, rather than Mojolicious apps.
+
+Acceptable arguments are strings that can be used by L<Plack::Util/load_psgi> or else instantated PSGI applications, including bare code references.
 
 =head1 SEE ALSO
 
