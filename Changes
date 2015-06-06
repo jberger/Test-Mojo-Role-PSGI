@@ -1,5 +1,7 @@
 Revision history for Perl module Test-Mojo-Role-PSGI 
 
+0.03 2015-06-06
+  - Fix a typo in cpanfile
 0.02 2015-06-03
   - Now a little more flexible in what is accepted as a psgi app
   - Bump version of MountPSGI to 0.04
