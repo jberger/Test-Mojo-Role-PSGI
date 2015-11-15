@@ -1,5 +1,8 @@
-Revision history for Perl module Test-Mojo-Role-PSGI 
+Revision history for Perl module Test-Mojo-Role-PSGI
 
+0.04 2015-11-15
+  - Added Catalyst tests (if available) (nicomen)
+  - Bump verion of MountPSGI to 0.05 (delayed/streaming)
 0.03 2015-06-06
   - Fix a typo in cpanfile
 0.02 2015-06-03

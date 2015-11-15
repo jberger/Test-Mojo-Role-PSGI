@@ -4,12 +4,13 @@ use Test::Mojo::WithRoles 'PSGI';
 
 use File::Spec;
 use FindBin;
-use lib File::Spec->catdir($FindBin::Bin, 'MyApp', 'lib');
 
-plan( skip_all => 'Tests need Catalyst installed to run' ) unless eval { require 'Catalyst.pm'; };
+push @INC, File::Spec->catdir($FindBin::Bin, 'MyApp', 'lib');
 
-my $t1 = Test::Mojo::WithRoles->new(File::Spec->catfile('.', 'MyApp', 'myapp.psgi'));
+plan( skip_all => 'Tests need Catalyst installed to run' ) unless eval { require Catalyst };
+plan( skip_all => 'Tests need Catalyst::Action::RenderView installed to run' ) unless eval { require Catalyst::Action::RenderView };
 
-$t1->get_ok("/")->status_is(200);
+my $t = Test::Mojo::WithRoles->new(File::Spec->catfile($FindBin::Bin, 'MyApp', 'myapp.psgi'));
+$t->get_ok("/")->status_is(200);
 
 done_testing;
