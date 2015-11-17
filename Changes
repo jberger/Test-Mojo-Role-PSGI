@@ -1,5 +1,8 @@
 Revision history for Perl module Test-Mojo-Role-PSGI
 
+0.05 2015-11-17
+  - Added more realistic Catalyst tests (nicomen)
+  - Bump verion of MountPSGI to 0.07 (request body handling)
 0.04 2015-11-15
   - Added Catalyst tests (if available) (nicomen)
   - Bump verion of MountPSGI to 0.05 (delayed/streaming)
