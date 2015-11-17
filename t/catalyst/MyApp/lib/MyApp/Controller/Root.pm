@@ -9,8 +9,13 @@ __PACKAGE__->config(namespace => '');
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
 
-    # Hello World
-    $c->response->body( $c->welcome_message );
+    if ($c->request->method eq 'GET') {
+        # Hello World
+        $c->response->body( $c->welcome_message );
+    } elsif ($c->request->method eq 'POST') {
+         $c->response->headers->header('Content-Type' => $c->request->headers->header('Content-Type'));
+         $c->response->body($c->request->body);
+    }
 }
 
 sub default :Path {
